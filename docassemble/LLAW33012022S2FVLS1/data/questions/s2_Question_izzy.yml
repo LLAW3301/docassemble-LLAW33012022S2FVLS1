@@ -1,0 +1,19 @@
+---
+mandatory: True
+question: |
+  Please fill in the following information.
+fields:
+  - "Are you seeking help for someone else?": other_self
+    datatype: yesnoradio
+  - "If it is for someone else, what is your relation to this person?": self
+    show if: other_self
+
+under: |
+  **IF YOU ARE IN DANGER, CALL 000.**
+
+  For information about family violence, call 1800Respect
+
+  For help with your mental health, call 13Yarn
+---
+
+
