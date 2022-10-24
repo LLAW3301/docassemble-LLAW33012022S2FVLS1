@@ -1,0 +1,275 @@
+# This is the main file for the FVLSAC 
+---
+metadata:
+  title: |
+    FVLSAC 
+  short title: |
+  organisation: Family Violence Legal Service Aboriginal Corporation
+---
+objects:
+  - HAAqualifying_agencies: DAList.using(there_are_any=True, auto_gather=False)
+  - FVLSAClogo: DAStaticFile.using(filename='X4.04.FVLSAC.png')
+  - endpoints: DADict
+---
+features:
+  css: X4.04.FVLSAC.css
+  debug: True
+  hide standard menu: False
+---
+mandatory: True
+code: |
+  HAAlogostring = '<div class="media"><img src="{}" class="mr-3" height="70"><div class="media-body"></div></div>'.format(FVLSAClogo.url_for())
+  set_parts(logo=HAAlogostring)
+---
+---
+sections:
+  - Welcome to FLVSA
+  - Privacy Agreement
+  - About you:
+    - Contact Details
+    - How Can We Help?
+  - What Happens Next?
+---
+features:
+  navigation: True
+  progress bar: True
+---
+metadata:
+  show login: false
+  exit url: https://www.google.com.au/
+---
+objects:
+- endpoint: DADict
+---
+#SLIDE 1 WELCOME
+mandatory: True
+question:  |
+  Welcome to the **Family Violence Legal Service Aboriginal Corporation (FVLSAC)**. 
+subquestion:  |
+ **THERE IS A QUICK EXIT BELOW FOR YOUR SAFETY - This will navigate you to the Google website.**
+ 
+ 
+  *This application does not provide legal advice. It will instead ask you some questions to gather information about your current circumstances.*
+  
+  FVLSAC staff will contact you within 3 business days to work out if you are eligible for us to help you.
+  
+  The information you provide will be kept confidential.
+  
+  If you agree to what we have said above, press continue. If not, select exit.
+
+buttons:
+  - I accept and wish to continue: continue
+  - I do not accept and wish to exit: exit
+under: |
+ 
+  # [**QUICK EXIT**](${url_of('https://www.google.com.au/') }) 
+  **IF YOU ARE IN DANGER, CALL 000.**
+  
+  There are crisis support services that are available 24 hours a day/7 days a week:
+  
+  * **13YARN on 13 92 76** - confidential one-on-one yarning opportunity with a Lifeline-trained Aborginal & Torres Strait Islander Crisis Supporter;
+  
+  * **Lifeline on 13 11 14** - crisis support for any person in Australia;
+  
+  * There is also **Lifeline Text on 0477 13 11 14** which offers a SMS-based service; and
+  
+  * **1800Respect on 1800 737 732** - support to people impacted by sexual assault, domestic or family violence and abuse
+  
+
+---
+mandatory: True
+code:  |
+  other_self
+  intro_to_about
+  contactbestwayforuser
+  your_issues
+---
+#SLIDE 2 PRIVACY AND WHO ARE YOU SEEKING HELP FOR
+question: |
+  Please fill in the following information.
+  
+subquestion:  |
+ **QUICK EXIT BUTTON BELOW FOR YOUR SAFETY**
+ 
+ *All information is confidential*
+  
+fields:
+  - "Who are you seeking help for": other_self
+    datatype: radio
+    choices:
+      - Myself
+      - Someone else
+    
+  - "If it is for someone else, what is your relation to this person?": someone_else
+    show if:
+      variable: other_self
+      is: Someone else
+under:  |
+  # [**QUICK EXIT**](${url_of('https://www.google.com.au/') })
+---
+---
+#mandatory: True
+question: |
+  You will now be asked some 
+  questions about yourself or the person you are seeking help for.
+subquestion:  |
+ **QUICK EXIT BUTTON BELOW FOR YOUR SAFETY**
+under:  |
+    # [**QUICK EXIT**](${url_of('https://www.google.com.au/') })
+field: intro_to_about
+section: About you
+---
+#SLIDE 3 CONTACT DETAILS
+mandatory: True
+question: |
+  
+  Please provide the contact details that are safest and best suited to your circumstances. This will allow us to contact you.
+
+subquestion:  | 
+  **QUICK EXIT BUTTON BELOW FOR YOUR SAFETY**
+  
+  Your information is confidential and only accessible by FVLSAC.
+ 
+fields:
+  - What is the best way for us to contact you?: contactbestwayforuser
+    datatype: radio
+    choices:
+      - Email
+      - Phone Number
+      - Postal Address
+  - Please enter the email you want to use: email
+    show if:
+     variable: contactbestwayforuser
+     is: Email
+  - Please enter the phone number you want to use: phonenumber
+    show if:
+     variable: contactbestwayforuser
+     is: Phone Number
+  - Please choose the best time slot for when we can call you: appropriatetime
+    input type: radio
+    choices:
+      - 9am - 12pm
+      - 12pm - 2pm
+      - 2pm - 5pm
+    show if:
+      variable: contactbestwayforuser
+      is: Phone Number
+  - Please enter the postal address you want to use: postaladdress
+    show if:
+     variable: contactbestwayforuser
+     is: Postal Address     
+under:  |
+    # [**QUICK EXIT**](${url_of('https://www.google.com.au/') })
+section: Contact Details
+---
+#SLIDE 5 - HOW CAN WE HELP?
+question: |
+  What issues are you facing?
+subquestion: |
+  **QUICK EXIT BUTTON BELOW FOR YOUR SAFETY**
+
+  Please tick any of the following that you feel apply to you.
+  You can click on more than one. If you feel like none of them apply to you, please click 'None of the Above' and complete the 'Other' textbox.
+mandatory: True
+fields:
+  - Your issues: your_issues
+    datatype: checkboxes
+    choices:
+      -   I am being physically hurt
+      -   I am being threatened
+      -   I am being verbally abused
+      -   I am struggling at home
+      -   I have been a victim of a crime
+      -   Children are involved in my situation
+under:  |
+  # [**QUICK EXIT**](${url_of('https://www.google.com.au/') })
+section: How Can We Help?
+---
+question: Please describe your problem in your own words
+subquestion:  |
+  **QUICK EXIT BUTTON BELOW FOR YOUR SAFETY**
+fields:
+  - "Other, please explain ('I don't know' is an acceptable answer!)": other_explain
+under:  |
+  # [**QUICK EXIT**](${url_of('https://www.google.com.au/') })
+section: How Can We Help?  
+---
+#SLIDE 6 - WHAT HAPPENS NEXT?
+mandatory: True
+question: |
+  Thank you for reaching out to us.
+subquestion: |
+  **QUICK EXIT BUTTON BELOW FOR YOUR SAFETY**
+  
+  %if email_sent_ok: 
+  **Your details have been forwarded to us via email.**
+  %endif
+    
+  We will get in touch with you within 3 business days via your preferred method.
+  
+  You are welcome to contact us anytime during business hours from 9:00am - 5:00pm via our free call service on **1800 309 912** or in person by coming in to one of our offices (details below).
+  
+  **Our office phone numbers and locations:**
+  ### Port Augusta
+    * Phone: (08) 8641 2195;
+    * Address: 26 Jervois Street, Port Augusta, SA 5700
+  ### Port Lincoln
+    * Phone: (08) 8683 1896;
+    * Address: 89 Liverpool Street, Port Lincoln, SA 5606;
+  ### Ceduna
+    * Phone: (08) 8625 3800;
+    * Address: 17 McKenzie Street, Ceduna, SA 5700
+  
+  **There is a message bank service for calls received after operating hours.**
+  
+  **IF YOU ARE IN DANGER, CALL 000.**
+  
+  There are crisis support services that are available 24 hours a day/7 days a week:
+  
+  * **13YARN on 13 92 76** - confidential one-on-one yarning opportunity with a Lifeline-trained Aborginal & Torres Strait Islander Crisis Supporter;
+  
+  * **Lifeline on 13 11 14** - crisis support for any person in Australia;
+  
+  * There is also **Lifeline Text on 0477 13 11 14** which offers a SMS-based service; and
+  
+  * **1800Respect on 1800 737 732** - support to people impacted by sexual assault, domestic or family violence and abuse
+  
+buttons:
+  - Restart: restart 
+  - Exit: exit 
+    url: https://www.fvlsac.org.au/
+under:  |
+    # [**QUICK EXIT**](${url_of('https://www.google.com.au/') })
+section: What Happens Next?
+---
+#SLIDE 7 - THANK YOU FOR YOUR TIME
+code: |
+  email_sent_ok = send_email(to="west0418@flinders.edu.au", template=notification)
+---
+template: notification
+subject: |
+  New Client Contact Information.
+content: |
+  
+  Question | User Answer
+  ---------|------------
+  Preferred Contact Method | ${contactbestwayforuser}
+  %if contactbestwayforuser == "Email":
+  Client Email | ${email}
+  %endif
+  %if contactbestwayforuser == "Phone Number":
+  Client Mobile | ${phonenumber}
+  Appropriate Contact Time | ${appropriatetime}
+  %endif
+  %if contactbestwayforuser == "Postal Address":
+  Client Address | ${postaladdress}
+  %endif
+  User Issue | ${your_issues.true_values()}
+  %if your_issues.all_false():
+  Other Issue | ${other_explain}
+  %endif
+  %if other_self == "Someone else":
+  Relationship to Person | ${someone_else}
+  %endif
+---
+---
