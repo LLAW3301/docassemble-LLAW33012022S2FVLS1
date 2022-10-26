@@ -1,10 +1,30 @@
+---
+# Modify the post default screen part to attribute work to Flinders and your client
+# Remember to replace XXXX with your client's name.
+default screen parts:
+  post: |
+    <div style="display: flex; height: 200px; align-items: flex-end; flex-direction: row-reverse">
+    <div style="margin: 5px"><img src="https://staff.flinders.edu.au/etc.clientlibs/flinders/clientlibs/clientlib-site/resources/images/flinderuni_main_logo_black.png" height="40">
+    </div>
+    <div style="margin: 5px; text-align: right">
+    <cite><small><i>
+    Developed by Flinders University in collaboration with Family Violence Legal Services Aboriginal Corporation
+    </i></small></cite>
+    </div>
+    </div>
+---
 # This is the main file for the FVLSAC 
 ---
 metadata:
   title: |
-    FVLSAC 
+    Family Violence Legal Services Aboriginal Corporation 
   short title: |
-  organisation: Family Violence Legal Service Aboriginal Corporation
+    FVLSAC
+  description: |
+    An interview increasing accessibility for those requiring our help
+  authors:
+    - name: Kirralee West, Evelyn Holt, Chelsea Murray, Isobel Tan, Beauregard Searle and Mohammad Sharker
+      organisation: Family Violence Legal Service Aboriginal Corporation
 ---
 objects:
   - HAAqualifying_agencies: DAList.using(there_are_any=True, auto_gather=False)
@@ -37,9 +57,6 @@ features:
 metadata:
   show login: false
   exit url: https://www.google.com.au/
----
-objects:
-- endpoint: DADict
 ---
 #SLIDE 1 WELCOME
 mandatory: True
@@ -100,7 +117,8 @@ fields:
       - Myself
       - Someone else
     
-  - "If it is for someone else, what is your relation to this person?": someone_else
+  - "If it is for someone else, what is your relation to this person? (Family Member, Friend, Client, Child in your care)": someone_else
+    default: (example) Friend
     show if:
       variable: other_self
       is: Someone else
@@ -138,10 +156,12 @@ fields:
       - Phone Number
       - Postal Address
   - Please enter the email you want to use: email
+    default: example@gmail.com
     show if:
      variable: contactbestwayforuser
      is: Email
   - Please enter the phone number you want to use: phonenumber
+    default: 0400 000 000
     show if:
      variable: contactbestwayforuser
      is: Phone Number
@@ -155,6 +175,7 @@ fields:
       variable: contactbestwayforuser
       is: Phone Number
   - Please enter the postal address you want to use: postaladdress
+    default: 100 Example Road, Bedford Park, SA 5000
     show if:
      variable: contactbestwayforuser
      is: Postal Address     
@@ -164,7 +185,7 @@ section: Contact Details
 ---
 #SLIDE 5 - HOW CAN WE HELP?
 question: |
-  What issues are you facing?
+  What issues are you, or the person you are seeking help for, facing?
 subquestion: |
   **QUICK EXIT BUTTON BELOW FOR YOUR SAFETY**
 
@@ -190,6 +211,7 @@ subquestion:  |
   **QUICK EXIT BUTTON BELOW FOR YOUR SAFETY**
 fields:
   - "Other, please explain ('I don't know' is an acceptable answer!)": other_explain
+    default: HELP!
 under:  |
   # [**QUICK EXIT**](${url_of('https://www.google.com.au/') })
 section: How Can We Help?  
